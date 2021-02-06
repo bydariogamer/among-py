@@ -1,19 +1,23 @@
 import pygame
-import world
+
 
 class Player(pygame.sprite.Sprite):
     """this class stands for the player"""
 
     def __init__(self, name, impostor, tasks, world, images):
         super().__init__()
+
         self.name = name
         self.impostor = impostor
-        self.alife = True
         self.tasks = tasks
         self.world = world
         self.images = images
+
+        self.alife = True
+
         self.pos_x = 0
         self.pos_y = 0
+
         self.up = False
         self.down = False
         self.right = False
@@ -33,14 +37,29 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         if self.down:
-            self.pos_y += world.speed
+            self.pos_y += self.world.speed
 
         if self.up:
-            self.pos_y -= world.speed
+            self.pos_y -= self.world.speed
 
         if self.right:
-            self.pos_x += world.speed
+            self.pos_x += self.world.speed
 
         if self.left:
-            self.pos_x -= world.speed
+            self.pos_x -= self.world.speed
+
+        for wall in self.world.walls:
+            if self.rect.colliderect(wall):
+                if self.down:
+                    self.pos_y -= self.world.speed
+
+                if self.up:
+                    self.pos_y += self.world.speed
+
+                if self.right:
+                    self.pos_x -= self.world.speed
+
+                if self.left:
+                    self.pos_x += self.world.speed
+
 
