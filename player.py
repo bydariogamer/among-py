@@ -62,5 +62,3 @@ class Player(pygame.sprite.Sprite):
 
                 if self.left:
                     self.pos_x += self.world.speed
-
-
