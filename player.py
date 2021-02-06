@@ -1,4 +1,5 @@
 import pygame
+# import socket
 
 
 class Player(pygame.sprite.Sprite):
