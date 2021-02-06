@@ -1,5 +1,6 @@
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     """this class stands for the player"""
 
@@ -22,7 +23,5 @@ class Player(pygame.sprite.Sprite):
 
         for interactive in world.interactives:
             if abs(interactive.pos_x - self.pos_x) < world.scope:
-                pass # TODO
-
-
+                pass    # TODO
 
