@@ -9,3 +9,6 @@ class World(object):
         self.impostors = []
         self.map = pygame.image.load("assets/test.png")
         self.rect = self.map.get_rect()
+        self.speed = 40
+        self.scope = 100
+
