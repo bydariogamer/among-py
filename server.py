@@ -43,3 +43,4 @@ class Client(threading.Thread):
                 self.connection.send(bytes('identify'))
             if self.confirmed:
                 if 'identify' in str(self.received):
+
