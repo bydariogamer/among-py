@@ -11,4 +11,3 @@ class World(object):
         self.rect = self.map.get_rect()
         self.speed = 40
         self.scope = 100
-

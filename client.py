@@ -1,20 +1,15 @@
-# import pygame
-import socket
-
-# Import socket module
+import pygame
 import socket
 
 # Create a socket object
-s = socket.socket()
+server = socket.socket()
 
 # Define the port on which you want to connect
-SERVER = '127.0.0.1'    # TODO how to give adifferent IP
-PORT = 12345    # TODO which port?
+SERVER = '127.0.0.1'    # TODO add a way to configure the IP
+PORT = 31416    # TODO which port
 
 # connect to the server on local computer
-s.connect((SERVER, PORT))
+server.connect((SERVER, PORT))
 
-# receive data from the server
-print(s.recv(1024))
-# close the connection
-s.close()
+server.send(bytes(password))
+
