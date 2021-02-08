@@ -1,6 +1,6 @@
 import socket
 import threading
-import pygame
+# import pygame
 import player
 
 PORT = 31416
@@ -8,10 +8,11 @@ PASSWORD = 'helloworld'
 
 config = open('server.config', 'r')
 for line in config.readlines():
-    if 'password:' in line:
+    if 'password: ' == line[0:9]:
         PASSWORD = line[10:]
-    if 'port: ' in line:
+    if 'port: ' == line[0:5]:
         PORT = line[6:]
+
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(("", PORT))
@@ -24,8 +25,9 @@ class Client(threading.Thread):
         self.data = client_data
         self.running = True
         self.received = None
-        self.player = player.Player
+        self.player = None
         self.confirmed = False
+        self.identified = False
 
     def run(self):
         while self.running:
@@ -37,10 +39,14 @@ class Client(threading.Thread):
         if self.received is not None:
             if str(self.received) == 'QUIT':
                 self.running = False
-            if str(self.received) == PASSWORD:
-                self.connection.send(bytes('confirmed ' + str(self.data[0])))
-                self.confirmed = True
-                self.connection.send(bytes('identify'))
-            if self.confirmed:
-                if 'identify' in str(self.received):
+                self.received = None
+            if self.player:
+                if str(self.received) == PASSWORD:
+                    self.connection.send(bytes('confirmed ' + str(self.data[0])))
+                    self.confirmed = True
+                    self.connection.send(bytes('identify'))
+                    self.received = None
+                if self.confirmed and self.player is None:
+                    self.player =
+
 
