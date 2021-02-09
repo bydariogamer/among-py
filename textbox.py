@@ -13,6 +13,7 @@ class TextBox(object):
         self.back_surface = pygame.Surface((width, height))
         self.back_surface.fill(color_back)
         self.text_surface = pygame.Surface((0, 0))
+        self.text_rect = self.text_surface.get_rect()
         self.rect = pygame.Rect(x, y, width, height)
         self.box_surface = self.back_surface = pygame.Surface((width, height))
         if font is None:
@@ -35,6 +36,7 @@ class TextBox(object):
             self.text_surface = self.font.render(self.text, True, (0, 0, 0))
             self.box_surface.blit(self.back_surface, (0, 0))
             self.box_surface.blit(self.back_surface, (5, 5))
+            self.text_rect = self.text_surface.get_rect()
 
     def draw(self):
         return self.box_surface
@@ -42,12 +44,13 @@ class TextBox(object):
     def render(self, screen):
         screen.blit(self.text_surface, self.rect)
         if self.active:
-            pygame.draw.line(screen, self.color_font, self.text_surface.get_rect().bottomright, self.text_surface.get_rect().topright)
+            pygame.draw.line(screen, self.color_font, self.text_rect.bottomright, self.text_rect.topright)
 
 
-"""
-tb = TextBox(100, 100)
 
+pygame.init()
+game = pygame.display.set_mode((200,200))
+tb = TextBox(10, 10, 50, 100)
 clock = pygame.time.Clock()
 while True:
     for event in pygame.event.get():
@@ -57,8 +60,7 @@ while True:
             tb.click(event)
         if event.type == pygame.TEXTINPUT:
             tb.add_text(event)
-    screen.fill("BLACK")
-    tb.render()
+    game.fill((0, 0, 0))
+    tb.render(game)
     pygame.display.flip()
     clock.tick(60)
-"""
