@@ -1,12 +1,12 @@
 import socket
 import threading
-# import pygame
+import pygame
 import player
 
 PORT = 31416
 PASSWORD = 'helloworld'
 
-config = open('server.config', 'r')
+config = open('server.conf', 'r')
 for line in config.readlines():
     if 'password: ' == line[0:9]:
         PASSWORD = line[10:]
