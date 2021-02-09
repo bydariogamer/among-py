@@ -47,9 +47,9 @@ class TextBox(object):
             pygame.draw.line(screen, self.color_font, self.text_rect.bottomright, self.text_rect.topright)
 
 
-
+# TEST
 pygame.init()
-game = pygame.display.set_mode((200,200))
+game = pygame.display.set_mode((200, 200))
 tb = TextBox(10, 10, 50, 100)
 clock = pygame.time.Clock()
 while True:
