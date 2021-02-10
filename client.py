@@ -18,6 +18,7 @@ pygame.display.set_caption(DISP_TIT)
 pygame.display.set_icon(DISP_ICO)
 game = pygame.display.set_mode((DISP_WID, DISP_HEI))
 
+
 class TextBox:
     width = 200
     height = 50
@@ -48,11 +49,7 @@ class TextBox:
         screen.blit(self.text_surface, (self.rect.x + 5, self.rect.y + 5))
                     
 
-
-
 # read last configuration
-configuration = open('client.conf', 'r')
-
 port = 31416
 password = 'helloworld'
 server = "127.0.0.1"
@@ -64,7 +61,7 @@ for line in configuration.readlines():
     if 'password: ' == line[0:9]:
         password = line[10:]
     if 'port: ' == line[0:5]:
-        port = line[6:]
+        port = str(line[6:])
     if 'server: ' == line[0:7]:
         server = line[8:]
     if 'name: ' == line[0:5]:
@@ -101,10 +98,10 @@ while not done:
     
 if not QUIT:
     configuration = open('client.conf', 'w')
-    file.write(f"name: {name}\n")
-    file.write(f"server: {server}\n")
-    file.write(f"port: {port}\n")
-    file.write(f"password: {password}\n")
+    configuration.write(f"name: {name}\n")
+    configuration.write(f"server: {server}\n")
+    configuration.write(f"port: {port}\n")
+    configuration.write(f"password: {password}\n")
     QUIT = False
     
 
@@ -116,8 +113,8 @@ while not QUIT:
     server = socket.socket()
 
     # connect to the server on local computer
-    server.connect((SERVER, PORT))
+    server.connect((server, port))
 
-    server.send(bytes(PASSWORD))
+    server.send(bytes(password))
 
 sys.exit()
