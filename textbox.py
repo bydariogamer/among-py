@@ -49,7 +49,7 @@ class TextBox(object):
 
 # TEST
 pygame.init()
-game = pygame.display.set_mode((200, 200))
+game = pygame.display.set_mode((800, 600))
 tb = TextBox(10, 10, 50, 100)
 clock = pygame.time.Clock()
 while True:
@@ -62,5 +62,5 @@ while True:
             tb.add_text(event)
     game.fill((0, 0, 0))
     tb.render(game)
-    pygame.display.flip()
+    pygame.display.update()
     clock.tick(60)
